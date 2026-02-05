@@ -5,14 +5,16 @@ username = input("Enter the username: ")
 password = getpass("Enter the password: ")
 
 router_details = {
-    "ip" : "192.168.11.205",
-    "device_type" : "cisco_ios",
-    "username" : username,
-    "password" : password
+    "ip": "192.168.11.10",
+    "username": username,
+    "password": password,
+    "device_type": "cisco_ios"
 }
+    
+
 
 ssh = ConnectHandler(**router_details)
-print("Connection is established using ssh..!: ")
+print("Connection with router established successfully")
 
 user_input = int(input("""Which routing protocol would you like to configure?
                        1. Static routes
@@ -32,7 +34,7 @@ if user_input == 1:
         int_configs = ssh.send_config_set(commands)
         print(int_configs)
 
-        int_details = ssh.send_commands("show ip interface brief")
+        int_details = ssh.send_command("show ip interface brief")
         print(int_details)
 
 elif user_input == 2:
